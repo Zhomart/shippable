@@ -19,9 +19,11 @@ if [ -z "$PUBLISH_REPO" ]; then
   exit 1
 fi
 
+VERSION_REGEX="^[0-9]+(\.[0-9]+)+(\..+)?$"
+
 # if ($IS_GIT_TAG); then
 # regexp matches `13.2`, `1.22.52`, `1.22.5.pre01`
-if [[ "$BRANCH" =~ [^\d+(\.\d+)+(\..+)?$] ]] ; then
+if [[ $BRANCH =~ $VERSION_REGEX ]] ; then
   IMAGE_VERSION=$BRANCH
   echo "Building and publishing docker image version :latest and :$IMAGE_VERSION"
   echo
